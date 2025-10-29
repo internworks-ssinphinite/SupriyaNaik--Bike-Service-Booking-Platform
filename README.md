@@ -1,47 +1,33 @@
-# 🏍️ Bike Service Booking Platform
+# 🏍️ Bike Service Booking Platform (BikeServe+)
 
 ## 📌 Overview
-The **Bike Service Booking Platform** is a web-based application designed to simplify the process of booking bike servicing appointments. It connects customers with nearby mechanics and service centers, allowing for seamless online booking, tracking, and service management.
+**BikeServe+** is an online bike service booking platform that simplifies how customers and mechanics manage service appointments.  
+It was created to address issues with manual booking, delays, and lack of real-time updates.  
 
-This platform enables users to schedule, manage, and track their bike service appointments easily, while mechanics can view and update booking statuses in real time.
+The platform allows customers to easily book services, choose packages, select available time slots, and track their service progress online.  
+Mechanics can view assigned bookings, manage slot timings, update service status, and mark them as completed efficiently.  
+
+The backend, developed using **Flask**, handles all API operations and connects to a **MySQL** database for secure and organized data storage.  
+The **React.js** frontend provides a smooth, responsive, and user-friendly interface for both customers and mechanics.  
+
+I designed a structured database to manage users, bookings, packages, and slot details effectively.  
+During development, I resolved challenges such as booking updates, slot conflicts, and API routing errors through backend refinements.  
+Overall, **BikeServe+** ensures a fast, transparent, and efficient system for managing bike service bookings with proper slot arrangements.
 
 ---
 
 ## 🚀 Features
 
-### 🧑‍💻 For Customers
-- User registration and login
-- Browse available service packages
-- Book bike servicing appointments
-- View booking history and status updates
-- Receive real-time notifications on service progress
+### 🧑‍💻 Customer Features
+- Register and log in securely  
+- Browse service packages  
+- Book bike service appointments online  
+- Track service status and view booking history  
 
-### 🔧 For Mechanics / Admin
-- Manage bookings (accept, reject, mark as completed)
-- View assigned customer details
-- Manage service packages and schedules
-- Dashboard with analytics and reports
-
----
-
-## 🏗️ Project Modules
-
-1. **User Module**
-   - Login / Signup
-   - Book Service
-   - Booking History
-   - Profile Management
-
-2. **Mechanic Module**
-   - Manage Bookings
-   - Update Booking Status
-   - View Customer Details
-
-3. **Admin Module**
-   - Manage Mechanics
-   - View All Bookings
-   - Manage Packages
-   - Reports and Analytics
+### 🔧 Mechanic Features
+- Login to mechanic dashboard  
+- View assigned bookings  
+- Update and mark bookings as completed  
 
 ---
 
@@ -49,17 +35,53 @@ This platform enables users to schedule, manage, and track their bike service ap
 
 | Layer | Technology |
 |-------|-------------|
-| **Frontend** | HTML, CSS, JavaScript, React / Vue (as used in your project) |
-| **Backend** | Python Flask / Django / Node.js (whichever you used) |
-| **Database** | MySQL / SQLite |
+| **Frontend** | React.js |
+| **Backend** | Python Flask |
+| **Database** | MySQL |
 | **Version Control** | Git & GitHub |
 
 ---
 
-## ⚙️ Installation and Setup
+## ⚙️ Installation and Setup (Windows)
 
-Follow these steps to set up the project locally 👇
+Follow these steps carefully to set up and run the **entire project** on your Windows system 👇  
 
-### 1️⃣ Clone the Repository
 ```bash
+# 1️⃣ Clone the repository
 git clone https://github.com/<your-username>/<your-repo-name>.git
+cd <your-repo-name>
+
+# 2️⃣ Setup the Frontend, Backend, and Database (all in one flow)
+
+# --- FRONTEND SETUP ---
+cd frontend
+npm install
+
+# --- BACKEND SETUP ---
+cd ../backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+
+# --- DATABASE SETUP ---
+# Open MySQL Command Prompt or Workbench and create the database
+CREATE DATABASE bike_service_db;
+
+# Update the following configuration in backend/app.py
+# Replace root and password with your MySQL credentials
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@localhost/bike_service_db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Initialize database tables
+python
+>>> from app import db
+>>> db.create_all()
+>>> exit()
+
+# --- RUN THE PROJECT ---
+# Start Flask backend
+python app.py
+
+# Open new terminal for frontend
+cd ../frontend
+npm start
